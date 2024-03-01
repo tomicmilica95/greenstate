@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: greenstate
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5433:5433'
+
+  backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./api:/usr/src/app
+      - ./api/tsconfig.json:/usr/src/app/tsconfig.json
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./client/src:/usr/src/app/src
+      - ./client/tsconfig.json:/usr/src/app/tsconfig.json
