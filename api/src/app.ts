@@ -3,20 +3,16 @@ import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AppDataSource } from './DataSource';
-import { UserController } from './controllers/UserController';
+import { configureRoutes } from './routing/Routing';
 
 config();
 const app = express();
 const port = process.env.PORT;
+
 app.use(bodyParser.json({ type: 'application/json' }));
 
 app.use(cors());
-
-app.get('*', (req: Request, res: Response) => {
-  res.status(505).json({ message: 'Bad Request' });
-});
-
-app.get('/users', UserController.getUsers);
+configureRoutes(app);
 
 AppDataSource.initialize()
   .then(async () => {
