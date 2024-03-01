@@ -3,11 +3,12 @@ FROM node:16
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-COPY tsconfig.json ./
-COPY src ./src
 
-RUN npm install --only=prod
+RUN npm install -g typescript ts-node
+RUN npm install
 
-EXPOSE 5000
+COPY . .
 
-CMD ["npm", "start"]
+EXPOSE 3001
+
+CMD ["npm", "run", "dev"]

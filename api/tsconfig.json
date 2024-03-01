@@ -2,14 +2,21 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "esModuleInterop": true,
-    "strict": true,
     "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
-  "type": "module",
-  "include": ["src/**/*.ts", "index.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }
