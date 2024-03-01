@@ -1,9 +1,9 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { config } from 'dotenv';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { AppDataSource } from './DataSource';
-import { configureRoutes } from './routing/Routing';
+import { AppDataSource } from './dataSource';
+import { configureRoutes } from './routing/routing';
 
 config();
 const app = express();

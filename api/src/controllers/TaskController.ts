@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../DataSource';
+import { AppDataSource } from '../dataSource';
 import { Task } from '../model/Task';
 
-export class TaskController {
+export class taskController {
   static async getTasks(req: Request, res: Response) {
     const taskRepository = AppDataSource.getRepository(Task);
     const users = await taskRepository.find();
