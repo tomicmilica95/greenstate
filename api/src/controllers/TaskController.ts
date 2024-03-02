@@ -11,4 +11,13 @@ export class taskController {
       data: users,
     });
   }
+
+  static async getByUserId(req: Request, res: Response) {
+    const taskRepository = AppDataSource.getRepository(Task);
+    const users = await taskRepository.find();
+
+    return res.status(200).json({
+      data: users,
+    });
+  }
 }

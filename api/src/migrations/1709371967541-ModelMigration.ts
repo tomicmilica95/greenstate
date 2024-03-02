@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class UserAndTaskMigration1709334087020 implements MigrationInterface {
-    name = 'UserAndTaskMigration1709334087020'
+export class ModelMigration1709371967541 implements MigrationInterface {
+    name = 'ModelMigration1709371967541'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TYPE "public"."task_priority_enum" AS ENUM('low', 'medium', 'high')`);
