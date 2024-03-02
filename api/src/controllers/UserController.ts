@@ -21,7 +21,7 @@ export class UserController {
 
       const token = jwt.sign({ user: newUser }, process.env.JWT_SECRET || '');
 
-      res.json(token);
+      res.json({ token, user: newUser });
     } catch (err) {
       if (err instanceof HandlerError) {
         res.status(err.statusCode).json({ message: err.message });
