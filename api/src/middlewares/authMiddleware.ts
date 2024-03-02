@@ -1,12 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { User } from '../model/User';
 
 interface UserToken extends jwt.JwtPayload {
-  user: User;
+  userId?: number;
+  user?: {
+    id: number;
+    email: string;
+  };
 }
 
-export const authMiddleware = (
+export const AuthMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -22,9 +25,13 @@ export const authMiddleware = (
       process.env.JWT_SECRET || ''
     ) as UserToken;
 
-    const { email } = decodedToken.user;
-    res.locals.token = {
-      email,
+    if (!decodedToken.id && !decodedToken.user?.email) {
+      throw new Error('Invalid token structure');
+    }
+
+    res.locals.currentUser = {
+      id: decodedToken.id || decodedToken.user?.id,
+      email: decodedToken.email || decodedToken.user?.email,
     };
 
     next();

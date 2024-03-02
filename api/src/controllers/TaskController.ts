@@ -1,23 +1,101 @@
 import { Request, Response } from 'express';
-import { AppDataSource } from '../dataSource';
-import { Task } from '../model/Task';
+import { TaskService } from '../services/taskService';
+import { HandlerError } from '../helpers/handleError';
 
-export class taskController {
-  static async getTasks(req: Request, res: Response) {
-    const taskRepository = AppDataSource.getRepository(Task);
-    const users = await taskRepository.find();
+export class TaskController {
+  static getTasks = async (req: Request, res: Response) => {
+    try {
+      const tasks = await TaskService.getAllTasks();
 
-    return res.status(200).json({
-      data: users,
-    });
+      return res.status(200).json({
+        data: tasks,
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+      throw new HandlerError(500, `Internal Server Error`);
+    }
+  };
+
+  static getTasksForCurrentUser = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    const currentUser = res.locals.currentUser;
+
+    try {
+      const tasks = await TaskService.getTasksForCurrentUser(currentUser.id);
+      res.status(200).json({ tasks });
+    } catch (err) {
+      if (err instanceof HandlerError) {
+        res.status(err.statusCode).json({ message: err.message });
+      } else {
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    }
+  };
+
+  static async createTask(req: Request, res: Response): Promise<void> {
+    const { title, description, priority, status, userId } = req.body;
+
+    try {
+      const newTask = await TaskService.createTask(
+        title,
+        description,
+        priority,
+        status,
+        userId
+      );
+
+      if (newTask) {
+        res
+          .status(201)
+          .json({ message: 'Task created successfully', task: newTask });
+      } else {
+        res.status(404).json({ message: 'User not found' });
+      }
+    } catch (err) {
+      if (err instanceof HandlerError) {
+        res.status(err.statusCode).json({ message: err.message });
+      } else {
+        res.status(500).json({ message: 'Something went wrong!' });
+      }
+    }
   }
 
-  static async getByUserId(req: Request, res: Response) {
-    const taskRepository = AppDataSource.getRepository(Task);
-    const users = await taskRepository.find();
+  static updateTask = async (req: Request, res: Response) => {
+    try {
+      const taskId = parseInt(req.params.taskId, 10);
 
-    return res.status(200).json({
-      data: users,
-    });
-  }
+      if (isNaN(taskId)) {
+        return res.status(400).json({ message: 'Invalid task ID' });
+      }
+
+      const updatedTask = await TaskService.updateTask(taskId, req.body);
+
+      if (!updatedTask) {
+        return res.status(404).json({ message: 'Task not found' });
+      }
+
+      return res
+        .status(200)
+        .json({ message: 'Task updated successfully', task: updatedTask });
+    } catch (err) {
+      if (err instanceof HandlerError) {
+        res.status(err.statusCode).json({ message: err.message });
+      } else {
+        res.status(500).json({ message: 'Internal Server Error' });
+      }
+    }
+  };
+
+  static deleteTask = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const taskId = parseInt(req.params.taskId, 10);
+      await TaskService.deleteTask(taskId);
+
+      res.status(200).json({ message: 'Task deleted successfully' });
+    } catch (error) {
+      throw new HandlerError(404, `Error deleting task`);
+    }
+  };
 }
