@@ -2,19 +2,22 @@ import { Request, Response } from 'express';
 
 import { AuthService } from '../services/authService';
 import { HandlerError } from '../helpers/handleError';
+import { UserRequest } from '../dto/userRequestDto';
 
 export class AuthController {
   static authenticate = async (req: Request, res: Response) => {
     try {
-      const { email, password } = req.body;
-      const { user, token } = await AuthService.authenticateUser(
-        email,
-        password
+      const user: UserRequest = {
+        email: req.body.email,
+        password: req.body.password,
+      };
+      const { token, user: loggedInUser } = await AuthService.authenticateUser(
+        user
       );
 
       res.locals.user = {
-        id: user.id,
-        email: user.email,
+        id: loggedInUser.id,
+        email: loggedInUser.email,
       };
 
       res.json({

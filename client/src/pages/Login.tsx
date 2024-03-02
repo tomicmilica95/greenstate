@@ -1,22 +1,22 @@
-import { AUTH_USER } from '../redux/types/userType';
+import { LOG_IN_USER } from '../redux/types/userType';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+export const Login = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleLogin = async () => {
     try {
       const payload = { email, password };
-      // Dispatch the action
-      await dispatch({ type: AUTH_USER, payload });
-      // The state has been updated after the login operation, you can perform any additional actions here
+      dispatch({ type: LOG_IN_USER, payload });
+      navigate('/dashboard');
     } catch (error) {
-      // Handle errors if necessary
       console.error('Login error:', error);
     }
   };
@@ -60,5 +60,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;

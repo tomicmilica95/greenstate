@@ -1,8 +1,6 @@
 import { Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
-import { AppDataSource } from '../dataSource';
 import { HandlerError } from '../helpers/handleError';
-import { User } from '../model/User';
 import { UserRequest } from '../dto/userRequestDto';
 import { UserService } from '../services/userService';
 
@@ -29,31 +27,4 @@ export class UserController {
       }
     }
   };
-
-  static getUsers = async (req: Request, res: Response) => {
-    const userRepository = AppDataSource.getRepository(User);
-    const users = await userRepository.find();
-    return res.status(200).json({
-      data: users,
-    });
-  };
-
-  static async login(req: Request, res: Response): Promise<void> {
-    try {
-      const user: UserRequest = {
-        email: req.body.email,
-        password: req.body.password,
-      };
-
-      const { token, user: loggedInUser } = await UserService.login(user);
-
-      res.json({ token, user: loggedInUser });
-    } catch (err) {
-      if (err instanceof HandlerError) {
-        res.status(err.statusCode).json({ message: err.message });
-      } else {
-        res.status(500).json({ message: 'Something went wrong!' });
-      }
-    }
-  }
 }

@@ -1,10 +1,8 @@
 import { AppDataSource } from '../dataSource';
 import { HandlerError } from '../helpers/handleError';
-import * as jwt from 'jsonwebtoken';
 import { User } from '../model/User';
 import { UserRequest } from '../dto/userRequestDto';
 import { hashPassword } from '../helpers/hashHelper';
-import { UserResponse } from '@/dto/userResponseDto';
 
 export class UserService {
   static validateUser(user: UserRequest): void {
@@ -35,25 +33,5 @@ export class UserService {
 
     await userRepository.save(newUser);
     return newUser;
-  }
-
-  static async login(
-    user: UserRequest
-  ): Promise<{ token: string; user: UserResponse }> {
-    const userRepository = AppDataSource.getRepository(User);
-    const existingUser = await userRepository.findOne({
-      where: { email: user.email },
-    });
-
-    if (!existingUser || existingUser.password !== user.password) {
-      throw new HandlerError(401, 'Invalid credentials');
-    }
-
-    const token = jwt.sign(
-      { id: existingUser.id, email: existingUser.email },
-      process.env.JWT_SECRET || ''
-    );
-
-    return { token, user: existingUser };
   }
 }

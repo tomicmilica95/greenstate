@@ -1,6 +1,5 @@
-import { TaskPayload, type TaskState as State, TaskState } from '@/types';
-import { createSlice, PayloadAction, createEntityAdapter, Update } from '@reduxjs/toolkit';
-import { Task } from '@/types';
+import { createSlice, PayloadAction, createEntityAdapter } from '@reduxjs/toolkit';
+import { TaskPayload, type TaskState as State, Task } from '@/types';
 
 const taskAdapter = createEntityAdapter<Task>({});
 
@@ -21,7 +20,19 @@ const taskSlice = createSlice({
       state.loading = true;
       state.error = false;
     },
-    updateTaskSuccess: (state: State, _action: PayloadAction<Task>): void => {
+    getByIdSuccess: (state: State, _action: PayloadAction<Task>): void => {
+      state.loading = false;
+      state.error = false;
+    },
+    getByIdError: (state: State, _action: PayloadAction<Task>): void => {
+      state.loading = false;
+      state.error = true;
+    },
+    update: (state: State, _action: PayloadAction<TaskPayload>): void => {
+      state.loading = false;
+      state.error = false;
+    },
+    updateSuccess: (state: State, _action: PayloadAction<Task>): void => {
       state.loading = false;
       state.error = false;
     },

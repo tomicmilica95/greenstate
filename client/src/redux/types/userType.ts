@@ -1,7 +1,2 @@
-export const AUTH_USER = 'AUTH_USER';
-
-export interface AuthUserRequest {
-  type: typeof AUTH_USER;
-}
-
-export type UserAction = AuthUserRequest;
+export const SIGN_UP_USER = 'SIGN_UP_USER';
+export const LOG_IN_USER = 'LOG_IN_USER';

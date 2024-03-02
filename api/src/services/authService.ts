@@ -1,25 +1,37 @@
+import { comparePassword } from '../helpers/hashHelper';
 import { AppDataSource } from '../dataSource';
 import { HandlerError } from '../helpers/handleError';
 import { User } from '../model/User';
 import * as jwt from 'jsonwebtoken';
+import { UserRequest } from '../dto/userRequestDto';
 
 export class AuthService {
   static async authenticateUser(
-    email: string,
-    password: string
+    user: UserRequest
   ): Promise<{ user: User; token: string }> {
     const userRepository = AppDataSource.getRepository(User);
-    const user = await userRepository.findOne({ where: { email } });
+    const existingUser = await userRepository.findOne({
+      where: { email: user.email },
+    });
 
-    if (!user || password !== user.password) {
+    if (!existingUser) {
+      throw new HandlerError(401, 'Invalid credentials');
+    }
+
+    const passwordMatch = await comparePassword(
+      user.password,
+      existingUser?.password
+    );
+
+    if (!passwordMatch) {
       throw new HandlerError(401, 'Invalid credentials');
     }
 
     const token = jwt.sign(
-      { id: user.id, email: user.email },
+      { id: existingUser.id, email: existingUser.email },
       process.env.JWT_SECRET || ''
     );
 
-    return { user, token };
+    return { user: existingUser, token };
   }
 }

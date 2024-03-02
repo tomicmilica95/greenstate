@@ -1,12 +1,13 @@
-import { useTranslation } from 'react-i18next';
-import Login from './pages/Login';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Dashboard, Login } from './pages';
 
 export const App = () => {
-  const { t } = useTranslation();
-
-  return (
-    <div>
-      <Login />
-    </div>
+  const routes = (
+    <Routes>
+      <Route path='/' element={<Login />} />
+      <Route path='/dashboard' element={<Dashboard />} />
+    </Routes>
   );
+
+  return <BrowserRouter>{routes}</BrowserRouter>;
 };
