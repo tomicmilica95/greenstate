@@ -7,10 +7,11 @@ import { UserController } from '../controllers/userController';
 export const configureRoutes = (app: Express) => {
   app.get('/users', UserController.getUsers);
   app.post('/signup', UserController.create);
-  app.post('/login', AuthMiddleware, AuthController.authenticate);
+  app.post('/auth', AuthMiddleware, AuthController.authenticate);
   app.post('/create', TaskController.createTask);
   app.get('/tasks', AuthMiddleware, TaskController.getTasksForCurrentUser);
   app.get('/getAll', TaskController.getTasks);
   app.put('/update/:taskId', TaskController.updateTask);
   app.delete('/delete/:taskId', TaskController.deleteTask);
+  app.post('/login', UserController.login);
 };

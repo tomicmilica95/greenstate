@@ -10,7 +10,6 @@ export class UserController {
   static create = async (req: Request, res: Response): Promise<void> => {
     try {
       const user: UserRequest = {
-        userId: req.body.id,
         email: req.body.email,
         password: req.body.password,
       };
@@ -38,4 +37,23 @@ export class UserController {
       data: users,
     });
   };
+
+  static async login(req: Request, res: Response): Promise<void> {
+    try {
+      const user: UserRequest = {
+        email: req.body.email,
+        password: req.body.password,
+      };
+
+      const { token, user: loggedInUser } = await UserService.login(user);
+
+      res.json({ token, user: loggedInUser });
+    } catch (err) {
+      if (err instanceof HandlerError) {
+        res.status(err.statusCode).json({ message: err.message });
+      } else {
+        res.status(500).json({ message: 'Something went wrong!' });
+      }
+    }
+  }
 }
