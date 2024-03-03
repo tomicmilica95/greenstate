@@ -1,4 +1,5 @@
 import { PriorityEnum, StatusEnum } from '@/enums';
+import { EntityState } from '@reduxjs/toolkit';
 
 export type Task = {
   id: string;
@@ -16,7 +17,6 @@ export type TaskPayload = {
 };
 
 export type TaskState = {
-  task: Task | null;
   loading: boolean;
   error: boolean;
-};
+} & EntityState<Task, string>;

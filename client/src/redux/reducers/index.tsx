@@ -1,16 +1,16 @@
 import { TaskState, UserState } from '@/types';
 import { combineReducers } from 'redux';
 import userSlice from './userReducer';
-import taskReducer from './taskReducer';
+import taskSlice from './taskReducer';
 
 export interface GlobalState {
   user: UserState;
   task: TaskState;
 }
 
-const reducer = combineReducers({
+const rootReducer = combineReducers({
   user: userSlice,
-  task: taskReducer
+  task: taskSlice
 });
 
-export default reducer;
+export default rootReducer;

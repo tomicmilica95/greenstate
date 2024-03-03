@@ -3,5 +3,5 @@ import userSaga from './userSaga';
 import taskSaga from './taskSaga';
 
 export default function* rootSaga() {
-  yield all([userSaga(), taskSaga()]);
+  yield all([taskSaga(), userSaga()]);
 }

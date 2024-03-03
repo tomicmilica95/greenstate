@@ -1,6 +1,5 @@
 import { call, put, StrictEffect, takeEvery } from 'redux-saga/effects';
 
-import { SIGN_UP_USER, LOG_IN_USER } from '../types/userType';
 import { login, signup } from '../../api/userApi';
 import { userActions } from '../reducers/userReducer';
 
@@ -9,7 +8,7 @@ function* signupUser(action: any): Generator<StrictEffect, void, any> {
     const response = yield call(signup, action.payload);
     const data = response.data;
 
-    localStorage.setItem('token', JSON.stringify(data.token));
+    localStorage.setItem('token', data.data.token);
 
     yield put(userActions.signupSuccess(data.user));
   } catch (e) {
@@ -22,7 +21,7 @@ function* loginUser(action: any): Generator<StrictEffect, void, any> {
     const response = yield call(login, action.payload);
     const data = response.data;
 
-    localStorage.setItem('token', JSON.stringify(data.token));
+    localStorage.setItem('token', data.data.token);
 
     yield put(userActions.loginSuccess(data.user));
   } catch (e) {
@@ -31,8 +30,8 @@ function* loginUser(action: any): Generator<StrictEffect, void, any> {
 }
 
 function* userSaga() {
-  yield takeEvery(SIGN_UP_USER, signupUser);
-  yield takeEvery(LOG_IN_USER, loginUser);
+  yield takeEvery(userActions.signup.type, signupUser);
+  yield takeEvery(userActions.login.type, loginUser);
 }
 
 export default userSaga;

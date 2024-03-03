@@ -5,13 +5,14 @@ import { TaskController } from '../controllers/taskController';
 import { UserController } from '../controllers/userController';
 
 export const configureRoutes = (app: Express) => {
-  app.get('/users', UserController.getUsers);
   app.post('/signup', UserController.create);
   app.post('/auth', AuthController.authenticate);
-  app.post('/create', TaskController.createTask);
-  app.get('/tasks', AuthMiddleware, TaskController.getTasksForCurrentUser);
-  app.get('/getAll', TaskController.getTasks);
+  app.post('/tasks', TaskController.createTask);
+  app.get(
+    '/tasks/userId',
+    AuthMiddleware,
+    TaskController.getTasksForCurrentUser
+  );
   app.put('/update/:taskId', TaskController.updateTask);
   app.delete('/delete/:taskId', TaskController.deleteTask);
-  //app.post('/login', UserController.login);
 };

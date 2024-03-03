@@ -7,5 +7,5 @@ export const signup = async (user: UserPayload) => {
 };
 
 export const login = async (user: UserPayload) => {
-  return await axios.post(`${BASE_URL}/login`, user);
+  return await axios.post(`${BASE_URL}/auth`, user);
 };

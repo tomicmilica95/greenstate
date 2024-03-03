@@ -1,4 +1,4 @@
-import { LOG_IN_USER } from '../redux/types/userType';
+import { userActions } from '../redux/reducers/userReducer';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,8 @@ export const Login = () => {
   const handleLogin = async () => {
     try {
       const payload = { email, password };
-      dispatch({ type: LOG_IN_USER, payload });
+      console.log(payload);
+      dispatch(userActions.login(payload));
       navigate('/dashboard');
     } catch (error) {
       console.error('Login error:', error);

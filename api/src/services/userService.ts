@@ -3,6 +3,7 @@ import { HandlerError } from '../helpers/handleError';
 import { User } from '../model/User';
 import { UserRequest } from '../dto/userRequestDto';
 import { hashPassword } from '../helpers/hashHelper';
+import { UserResponse } from '@/dto/userResponseDto';
 
 export class UserService {
   static validateUser(user: UserRequest): void {
@@ -15,7 +16,7 @@ export class UserService {
     }
   }
 
-  static async createUser(user: UserRequest): Promise<User> {
+  static async createUser(user: UserRequest): Promise<UserResponse> {
     const userRepository = AppDataSource.getRepository(User);
 
     const existingUser = await userRepository.findOne({
@@ -32,6 +33,6 @@ export class UserService {
     });
 
     await userRepository.save(newUser);
-    return newUser;
+    return { id: newUser.id, email: newUser.email };
   }
 }

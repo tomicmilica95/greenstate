@@ -12,7 +12,7 @@ export type UserState = {
 
 export type UserPayload = {
   email: string;
-  pasword: string;
+  password: string;
 };
 
 export type LoginResponse = {
