@@ -7,7 +7,7 @@ import { UserController } from '../controllers/userController';
 export const configureRoutes = (app: Express) => {
   app.post('/signup', UserController.create);
   app.post('/auth', AuthController.authenticate);
-  app.post('/tasks', TaskController.createTask);
+  app.post('/tasks', AuthMiddleware, TaskController.createTask);
   app.get(
     '/tasks/userId',
     AuthMiddleware,

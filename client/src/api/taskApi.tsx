@@ -15,7 +15,7 @@ export const getTasks = async () => {
 };
 
 export const createTask = async (taskPayload: TaskPayload) => {
-  return await axios.post('/tasks', taskPayload);
+  return await getTasksApi.post('tasks', taskPayload);
 };
 
 export const updateTask = async (id: number) => {

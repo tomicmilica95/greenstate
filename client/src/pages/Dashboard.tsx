@@ -3,6 +3,7 @@ import { TaskModal } from './TaskModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { taskActions } from '../redux/reducers/taskReducer';
 import { selectors } from '../redux/selectors/taskSelectors';
+import { Task } from '../components';
 
 export const Dashboard = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -30,12 +31,10 @@ export const Dashboard = () => {
   return (
     <div>
       {tasks.length === 0 ? (
-        <button onClick={handleCreateTask}>Create Task</button>
+        <Task />
       ) : (
         <div>
           {tasks.flat().map((task) => {
-            console.log('Current Task:', task);
-
             return (
               <div key={task.id}>
                 <p>Title: {task.title}</p>

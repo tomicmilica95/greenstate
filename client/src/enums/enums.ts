@@ -1,10 +1,10 @@
 export enum StatusEnum {
-  IN_PROGRESS = 'in progress',
-  DONE = 'done'
+  InProgress = 'in progress',
+  Done = 'done'
 }
 
 export enum PriorityEnum {
-  LOW = 'low',
-  MEDIUM = 'medium',
-  HIGH = 'high'
+  Low = 'low',
+  Medium = 'medium',
+  High = 'high'
 }

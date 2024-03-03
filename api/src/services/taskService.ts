@@ -5,6 +5,7 @@ import { DeepPartial } from 'typeorm';
 import { PriorityEnum } from '../enums/PriorityEnum';
 import { StatusEnum } from '../enums/StatusEnum';
 import { HandlerError } from '../helpers/handleError';
+import { TaskResponse } from '../dto/taskResponseDto';
 
 export class TaskService {
   static async getTasksForCurrentUser(userId: number): Promise<Task[]> {
@@ -54,7 +55,7 @@ export class TaskService {
   static async updateTask(
     taskId: number,
     updatedTask: Partial<Task>
-  ): Promise<Task | null> {
+  ): Promise<TaskResponse> {
     const taskRepository = AppDataSource.getRepository(Task);
     const existingTask = await taskRepository.findOne({
       where: { id: taskId },

@@ -8,7 +8,7 @@ function* signupUser(action: any): Generator<StrictEffect, void, any> {
     const response = yield call(signup, action.payload);
     const data = response.data;
 
-    localStorage.setItem('token', data.data.token);
+    localStorage.setItem('token', data.token);
 
     yield put(userActions.signupSuccess(data.user));
   } catch (e) {
@@ -21,7 +21,7 @@ function* loginUser(action: any): Generator<StrictEffect, void, any> {
     const response = yield call(login, action.payload);
     const data = response.data;
 
-    localStorage.setItem('token', data.data.token);
+    localStorage.setItem('token', data.token);
 
     yield put(userActions.loginSuccess(data.user));
   } catch (e) {

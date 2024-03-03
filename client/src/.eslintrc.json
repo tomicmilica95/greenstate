@@ -29,15 +29,12 @@
     "no-self-compare": "error",
     "no-sequences": "error",
     "no-label-var": "error",
-    "no-shadow": [
-      "error",
-      {
-        "builtinGlobals": true,
-        "hoist": "all"
-      }
-    ],
+    "rules": {
+      "no-shadow": "off",
+      "@typescript-eslint/no-shadow": "error"
+    },
     "react/react-in-jsx-scope": "off",
-    "no-shadow-restricted-names": "error",
+
     "no-undef-init": "error",
     "block-spacing": ["error", "always"],
     "brace-style": ["error", "1tbs"],

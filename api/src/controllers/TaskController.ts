@@ -35,21 +35,19 @@ export class TaskController {
   };
 
   static async createTask(req: Request, res: Response): Promise<void> {
-    const { title, description, priority, status, userId } = req.body;
-
+    const { title, description, priority, status } = req.body;
+    const currentUser = res.locals.currentUser;
     try {
       const newTask = await TaskService.createTask(
         title,
         description,
         priority,
         status,
-        userId
+        currentUser.id
       );
 
       if (newTask) {
-        res
-          .status(201)
-          .json({ message: 'Task created successfully', task: newTask });
+        res.status(201).json({ task: newTask });
       } else {
         res.status(404).json({ message: 'User not found' });
       }

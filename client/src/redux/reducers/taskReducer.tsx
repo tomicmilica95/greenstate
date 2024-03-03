@@ -24,7 +24,7 @@ const taskSlice = createSlice({
       state.loading = false;
       state.error = true;
     },
-    create: (state: TaskState, action: PayloadAction<Task>): void => {
+    create: (state: TaskState, action: PayloadAction<TaskPayload>): void => {
       state.loading = false;
       state.error = false;
     },

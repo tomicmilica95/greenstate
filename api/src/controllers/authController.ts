@@ -21,11 +21,8 @@ export class AuthController {
       };
 
       res.json({
-        message: 'Login successful',
-        data: {
-          user: res.locals.user,
-          token: token,
-        },
+        user: res.locals.user,
+        token: token,
       });
     } catch (err) {
       if (err instanceof HandlerError) {
