@@ -1,20 +1,9 @@
 import { call, put, StrictEffect, takeEvery } from 'redux-saga/effects';
 
-import { getTasks, createTask, updateTask } from '../../api/taskApi';
+import { getTasks, createTask, updateTask, deleteTask } from '../../api/taskApi';
 import { taskActions } from '../reducers/taskReducer';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { TaskPayload } from '@/types';
-
-// function* getOneTask(action: any): Generator<StrictEffect, void, any> {
-//   try {
-//     const response = yield call(getById, action.payload);
-//     const data = response.data;
-
-//     yield put(taskActions.getById(data));
-//   } catch (e) {
-//     yield put(taskActions.updateError(true));
-//   }
-// }
+import { Task, TaskPayload } from '@/types';
 
 function* getAllTasks(): Generator<StrictEffect, void, any> {
   try {
@@ -38,14 +27,26 @@ function* create(action: PayloadAction<TaskPayload>): Generator<StrictEffect, vo
   }
 }
 
-function* update(action: PayloadAction<number>): Generator<StrictEffect, void, any> {
+function* update(action: PayloadAction<Task>): Generator<StrictEffect, void, any> {
   try {
     const response = yield call(updateTask, action.payload);
     const data = response.data;
 
-    yield put(taskActions.createSuccess(data));
+    yield put(taskActions.updateSuccess(data));
+    yield put(taskActions.getAllTasks());
   } catch (e) {
-    yield put(taskActions.createError(true));
+    yield put(taskActions.updateError(true));
+  }
+}
+
+function* deleteOneTask(action: PayloadAction<string>): Generator<StrictEffect, void, any> {
+  try {
+    const response = yield call(deleteTask, action.payload);
+    const data = response.data;
+
+    yield put(taskActions.deleteSuccess(data));
+  } catch (e) {
+    yield put(taskActions.deleteError(true));
   }
 }
 
@@ -53,6 +54,7 @@ function* taskSaga() {
   yield takeEvery(taskActions.create, create);
   yield takeEvery(taskActions.getAllTasks, getAllTasks);
   yield takeEvery(taskActions.update, update);
+  yield takeEvery(taskActions.delete, deleteOneTask);
 }
 
 export default taskSaga;

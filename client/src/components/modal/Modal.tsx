@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import { Dialog, DialogContent, DialogTitle as MuiDialogTitle, Typography } from '@mui/material';
 
@@ -16,7 +15,7 @@ const DialogTitle = ({ title }: DialogTitleProps) => {
         display: 'flex',
         justifyContent: 'space-between',
         padding: '1.875rem',
-        backgroundColor: 'red'
+        backgroundColor: 'white'
       }}>
       <Typography
         variant='h4'
@@ -35,7 +34,6 @@ type ModalComponentProps = {
   message: string;
   subtitle: string;
   isOpen: boolean;
-  onCancel: () => void;
   children: React.ReactNode;
   modalWidth?: false | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disableEnforceFocus?: boolean;
@@ -46,7 +44,6 @@ type ModalComponentProps = {
 export const ModalComponent: React.FC<ModalComponentProps> = ({
   message,
   isOpen,
-  onCancel,
   children,
   subtitle,
   modalWidth = 'sm',
@@ -55,7 +52,6 @@ export const ModalComponent: React.FC<ModalComponentProps> = ({
   return (
     <Dialog
       open={isOpen}
-      onClose={onCancel}
       aria-labelledby='dialog-title'
       fullWidth
       maxWidth={modalWidth}
@@ -66,14 +62,7 @@ export const ModalComponent: React.FC<ModalComponentProps> = ({
       }}
       disableEnforceFocus={disableEnforceFocus}>
       <DialogTitle title={message} subtitle={subtitle} />
-      <DialogContent
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          padding: '1.875rem'
-        }}>
-        {children}
-      </DialogContent>
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   );
 };

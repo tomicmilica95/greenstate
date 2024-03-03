@@ -17,6 +17,7 @@ export const Login = () => {
   const [t] = useTranslation('common');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUrl = window.location.pathname;
 
   const initialValues: UserPayload = {
     email: '',
@@ -25,7 +26,11 @@ export const Login = () => {
 
   const handleSubmit = (values: UserPayload) => {
     try {
-      dispatch(userActions.login(values));
+      if (currentUrl === '/login') {
+        dispatch(userActions.login(values));
+      } else {
+        dispatch(userActions.signup(values));
+      }
       navigate('/dashboard');
     } catch (error) {
       console.error('Login error:', error);
@@ -73,7 +78,7 @@ export const Login = () => {
                 helperText={touched.password ? errors.password : ''}
               />
               <Button type='submit' variant='contained'>
-                {t('login')}
+                {currentUrl === '/login' ? t('login') : t('signup')}
               </Button>
             </Box>
           </Form>

@@ -5,5 +5,8 @@
   "emailInvalid": "Email Invalid",
   "emailRequired": "Email Required",
   "passwordRequired": "Password Required",
-  "createTask": "Create Task"
+  "createTask": "Create Task",
+  "editTask": "Edit Task",
+  "title": "Title",
+  "description": "Description"
 }

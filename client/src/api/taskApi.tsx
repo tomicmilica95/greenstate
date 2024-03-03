@@ -1,5 +1,5 @@
-import { BASE_URL } from '../constants/urlConstants';
 import axios from 'axios';
+import { BASE_URL } from '../constants/';
 import { Task, TaskPayload } from '../types/Task';
 
 const getTasksApi = axios.create({
@@ -18,8 +18,13 @@ export const createTask = async (taskPayload: TaskPayload) => {
   return await getTasksApi.post('tasks', taskPayload);
 };
 
-export const updateTask = async (id: number) => {
-  return await axios.post(`${BASE_URL}/update/${id}`);
+export const updateTask = async (task: Task) => {
+  const { id, ...payload } = task;
+  return await axios.put(`${BASE_URL}/update/${id}`, payload);
+};
+
+export const deleteTask = async (id: string) => {
+  return await axios.delete(`${BASE_URL}/delete/${id}`);
 };
 
 getTasksApi.interceptors.request.use(

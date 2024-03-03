@@ -6,21 +6,19 @@ import { ModalComponent } from '../../components/modal/Modal';
 
 import { ModalContent } from '../../components/modalContent/ModalContent';
 import { useTranslation } from 'react-i18next';
-import { Box, Button } from '@mui/material';
-import { Task } from '../../components/Task';
+import { Box, Button, Grid } from '@mui/material';
+import { TaskComponent } from '../../components/Task';
 
 export const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const tasks = useSelector(selectors.selectAll);
   const [t] = useTranslation('common');
-  //const oneTask = useSelector(selectors.selectById('1'));
-  const urlParams = new URLSearchParams(window.location.search);
-  const myParam = urlParams.get('id');
+
   useEffect(() => {
     dispatch(taskActions.getAllTasks());
   }, []);
-  console.log(tasks);
+
   return (
     <Box
       display={'flex'}
@@ -29,28 +27,18 @@ export const Dashboard = () => {
       flexDirection={'column'}
       height={'100vh'}
       gap={5}>
-      {tasks.length === 0 ? (
-        <Button variant='contained' sx={{ background: '#733CE5' }} onClick={() => setIsOpen(true)}>
-          Create Modal
-        </Button>
-      ) : (
-        <Box
-          display={'flex'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          height={'100vh'}
-          gap={5}>
+      <Button variant='contained' sx={{ background: '#733CE5' }} onClick={() => setIsOpen(true)}>
+        {t('createModal')}
+      </Button>
+      {tasks.length !== 0 && (
+        <Grid container spacing={2} width={'50%'}>
           {tasks.flat().map((task) => {
-            return <Task task={task} key={task.id} />;
+            return <TaskComponent task={task} key={task.id} />;
           })}
-        </Box>
+        </Grid>
       )}
       <ModalComponent message={t('createTask')} subtitle={t('subtitle')} isOpen={isOpen}>
-        {
-          <div>
-            <ModalContent />
-          </div>
-        }
+        <ModalContent onClose={() => setIsOpen(false)} />
       </ModalComponent>
     </Box>
   );
