@@ -1,3 +1,2 @@
-export * from './Login';
-export * from './Dashboard';
-export * from './TaskModal';
+export * from './login/Login';
+export * from './dashboard/Dashboard';

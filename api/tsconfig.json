@@ -12,6 +12,7 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
+    "types": ["node"],
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"]

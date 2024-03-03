@@ -24,7 +24,7 @@ export class TaskController {
 
     try {
       const tasks = await TaskService.getTasksForCurrentUser(currentUser.id);
-      res.status(200).json({ tasks });
+      res.status(200).json(tasks);
     } catch (err) {
       if (err instanceof HandlerError) {
         res.status(err.statusCode).json({ message: err.message });
@@ -47,7 +47,7 @@ export class TaskController {
       );
 
       if (newTask) {
-        res.status(201).json({ task: newTask });
+        res.status(201).json({ newTask });
       } else {
         res.status(404).json({ message: 'User not found' });
       }

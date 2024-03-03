@@ -5,13 +5,13 @@ import i18n from 'i18next';
 
 i18n.use(initReactI18next).init({
   resources: {
-    EnglishUS: {
-      common: enTranslation,
-    },
+    en: {
+      common: enTranslation
+    }
   },
-  keySeparator: false,
+  keySeparator: '.',
   interpolation: { escapeValue: false },
-  lng: 'EnglishUS',
+  lng: 'en'
 });
 
 export default i18n;

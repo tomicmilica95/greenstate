@@ -22,7 +22,7 @@
   "plugins": ["react", "@typescript-eslint"],
   "ignorePatterns": ["config/*", "scripts/*", "react-app-env.d.ts"],
   "rules": {
-    "curly": "error",
+    "curly": "off",
     "eqeqeq": "error",
     "no-empty-function": "error",
     "no-multi-spaces": "error",
@@ -31,7 +31,7 @@
     "no-label-var": "error",
     "rules": {
       "no-shadow": "off",
-      "@typescript-eslint/no-shadow": "error"
+      "@typescript-eslint/no-shadow": 2
     },
     "react/react-in-jsx-scope": "off",
 

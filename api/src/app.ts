@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import { AppDataSource } from './dataSource';
 import { configureRoutes } from './routing/routing';
+import { HandlerError } from './helpers/handleError';
 
 config();
 const app = express();
@@ -21,4 +22,4 @@ AppDataSource.initialize()
     });
     console.log('Data Source has been initialized!');
   })
-  .catch((error) => console.log(error));
+  .catch((error) => new HandlerError(500, error));
