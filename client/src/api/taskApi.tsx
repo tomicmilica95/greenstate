@@ -1,5 +1,6 @@
 import { BASE_URL } from '../constants/urlConstants';
 import axios from 'axios';
+import { Task, TaskPayload } from '../types/Task';
 
 const getTasksApi = axios.create({
   baseURL: BASE_URL
@@ -11,6 +12,10 @@ export const getById = async () => {
 
 export const getTasks = async () => {
   return await getTasksApi.get('/tasks/userId');
+};
+
+export const createTask = async (taskPayload: TaskPayload) => {
+  return await axios.post('/tasks', taskPayload);
 };
 
 export const updateTask = async (id: number) => {

@@ -9,7 +9,8 @@ export const Dashboard = () => {
   const dispatch = useDispatch();
   const tasks = useSelector(selectors.selectAll);
   //const oneTask = useSelector(selectors.selectById('1'));
-
+  const urlParams = new URLSearchParams(window.location.search);
+  const myParam = urlParams.get('id');
   useEffect(() => {
     dispatch(taskActions.getAllTasks());
   }, []);
@@ -28,9 +29,25 @@ export const Dashboard = () => {
 
   return (
     <div>
-      <button onClick={handleCreateTask}>Create Task</button>
+      {tasks.length === 0 ? (
+        <button onClick={handleCreateTask}>Create Task</button>
+      ) : (
+        <div>
+          {tasks.flat().map((task) => {
+            console.log('Current Task:', task);
 
-      {/* Render the TaskModal */}
+            return (
+              <div key={task.id}>
+                <p>Title: {task.title}</p>
+                <p>Description: {task.description}</p>
+                <p>Priority: {task.priority}</p>
+                <p>Status: {task.status}</p>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
       {isModalOpen && (
         <TaskModal
           isOpen={isModalOpen}

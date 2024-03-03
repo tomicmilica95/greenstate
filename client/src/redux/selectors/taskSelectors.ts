@@ -1,8 +1,8 @@
-import { createSelector, type EntityState } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit';
 
-import { type TaskState } from 'types';
+import { TaskState } from 'types';
 import { initialState, taskAdapter } from '../reducers/taskReducer';
-import { type GlobalState } from '../reducers';
+import { GlobalState } from '../reducers';
 
 const createSelectors = (selectState: { (state: GlobalState): TaskState }) => {
   const taskSelector = taskAdapter.getSelectors(selectState);
