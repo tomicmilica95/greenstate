@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { TaskService } from '../services/taskService';
 import { HandlerError } from '../helpers/handleError';
+import { TaskService } from '../services/taskService';
 
 export class TaskController {
   static getTasks = async (req: Request, res: Response) => {

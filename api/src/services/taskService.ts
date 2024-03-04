@@ -1,11 +1,11 @@
 import { AppDataSource } from '../dataSource';
-import { User } from '../model/User';
-import { Task } from '../model/Task';
 import { DeepPartial } from 'typeorm';
+import { HandlerError } from '../helpers/handleError';
 import { PriorityEnum } from '../enums/PriorityEnum';
 import { StatusEnum } from '../enums/StatusEnum';
-import { HandlerError } from '../helpers/handleError';
+import { Task } from '../model/Task';
 import { TaskResponse } from '../dto/taskResponseDto';
+import { User } from '../model/User';
 
 export class TaskService {
   static async getTasksForCurrentUser(userId: number): Promise<Task[]> {

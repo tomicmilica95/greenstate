@@ -1,9 +1,9 @@
-import { comparePassword } from '../helpers/hashHelper';
 import { AppDataSource } from '../dataSource';
 import { HandlerError } from '../helpers/handleError';
 import { User } from '../model/User';
-import * as jwt from 'jsonwebtoken';
+import { comparePassword } from '../helpers/hashHelper';
 import { UserRequest } from '../dto/userRequestDto';
+import * as jwt from 'jsonwebtoken';
 
 export class AuthService {
   static async authenticateUser(

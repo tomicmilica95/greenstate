@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import * as jwt from 'jsonwebtoken';
 import { HandlerError } from '../helpers/handleError';
 import { UserRequest } from '../dto/userRequestDto';
 import { UserService } from '../services/userService';
+import * as jwt from 'jsonwebtoken';
 
 export class UserController {
   static create = async (req: Request, res: Response): Promise<void> => {

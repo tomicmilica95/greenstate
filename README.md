@@ -1,6 +1,6 @@
 Project Instructions
-Welcome to My Project!
-Hello and thank you for checking out my project! 😊
+
+Welcome to My Project!😊
 
 Docker Setup
 

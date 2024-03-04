@@ -3,7 +3,7 @@ import { Field, Form, Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
-import { PriorityEnum, StatusEnum } from '../../enums';
+import { PriorityEnum, StatusEnum } from '../../enums/enums';
 import { Task, TaskPayload } from '@/types';
 import { createEditValidation } from './Validation';
 import { taskActions } from '../../redux/reducers/taskReducer';

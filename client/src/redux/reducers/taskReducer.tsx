@@ -35,18 +35,6 @@ const taskSlice = createSlice({
       state.loading = false;
       state.error = false;
     },
-    getById: (state: TaskState, action: PayloadAction<TaskPayload>): void => {
-      state.loading = true;
-      state.error = false;
-    },
-    getByIdSuccess: (state: TaskState, action: PayloadAction<Task>): void => {
-      state.loading = false;
-      state.error = false;
-    },
-    getByIdError: (state: TaskState, action: PayloadAction<Task>): void => {
-      state.loading = false;
-      state.error = true;
-    },
     update: (state: TaskState, action: PayloadAction<Task>): void => {
       state.loading = false;
       state.error = false;

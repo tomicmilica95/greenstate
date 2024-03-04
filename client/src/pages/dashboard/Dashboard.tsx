@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, Grid } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { taskActions } from '../../redux/reducers/taskReducer';
 import { selectors } from '../../redux/selectors/taskSelectors';
 import { ModalComponent } from '../../components/modal/Modal';
-
 import { ModalContent } from '../../components/modalContent/ModalContent';
-import { useTranslation } from 'react-i18next';
-import { Box, Button, Grid } from '@mui/material';
 import { TaskComponent } from '../../components/Task';
 
 export const Dashboard = () => {

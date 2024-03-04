@@ -1,4 +1,4 @@
-import { PriorityEnum, StatusEnum } from '@/enums';
+import { PriorityEnum, StatusEnum } from '../enums/enums';
 import { EntityState } from '@reduxjs/toolkit';
 
 export type Task = {

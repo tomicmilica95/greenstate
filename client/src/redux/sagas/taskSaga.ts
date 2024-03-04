@@ -1,9 +1,8 @@
-import { call, put, StrictEffect, takeEvery } from 'redux-saga/effects';
-
-import { getTasks, createTask, updateTask, deleteTask } from '../../api/taskApi';
-import { taskActions } from '../reducers/taskReducer';
+import { call, put, takeEvery, StrictEffect } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { Task, TaskPayload } from '@/types';
+import { getTasks, createTask, updateTask, deleteTask } from '../../api/taskApi';
+import { taskActions } from '../reducers/taskReducer';
 
 function* getAllTasks(): Generator<StrictEffect, void, any> {
   try {

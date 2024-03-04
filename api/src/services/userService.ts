@@ -2,8 +2,8 @@ import { AppDataSource } from '../dataSource';
 import { HandlerError } from '../helpers/handleError';
 import { User } from '../model/User';
 import { UserRequest } from '../dto/userRequestDto';
-import { hashPassword } from '../helpers/hashHelper';
 import { UserResponse } from '@/dto/userResponseDto';
+import { hashPassword } from '../helpers/hashHelper';
 
 export class UserService {
   static validateUser(user: UserRequest): void {

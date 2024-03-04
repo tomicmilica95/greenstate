@@ -1,8 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
-
+import { GlobalState } from '../reducers';
 import { TaskState } from 'types';
 import { initialState, taskAdapter } from '../reducers/taskReducer';
-import { GlobalState } from '../reducers';
 
 const createSelectors = (selectState: { (state: GlobalState): TaskState }) => {
   const taskSelector = taskAdapter.getSelectors(selectState);

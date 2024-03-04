@@ -1,17 +1,14 @@
 import { useTranslation } from 'react-i18next';
-
 import { Form, Formik, Field } from 'formik';
-
-import { validationSchema } from './Validation';
-import { UserPayload } from '@/types';
-import { userActions } from '../../redux/reducers/userReducer';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import './styles.css';
 import { Logo } from '../../assets';
-import { Box } from '@mui/system';
+import { UserPayload } from '@/types';
+import { validationSchema } from './Validation';
+import { userActions } from '../../redux/reducers/userReducer';
 
 export const Login = () => {
   const [t] = useTranslation('common');
