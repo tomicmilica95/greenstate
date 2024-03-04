@@ -6,8 +6,8 @@ Docker Setup
 Clone the Code.
 Start by pulling the code from the repository.
 
-Run Docker:
-Open your terminal and execute the following command:
+Run Docker.
+Open your terminal and execute the following command
 	docker-compose up
 
 If you encounter any Docker-related issues on Windows 10, try running these commands:
