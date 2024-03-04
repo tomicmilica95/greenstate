@@ -8,11 +8,11 @@ Start by pulling the code from the repository.
 
 Run Docker:
 Open your terminal and execute the following command:
-docker-compose up
+	docker-compose up
 
 If you encounter any Docker-related issues on Windows 10, try running these commands:
-docker pull node:alpine
-docker-compose up
+	docker pull node:alpine
+	docker-compose up
 
 Alternative Setup
 If the above Docker setup doesn't suit your needs(but I hope it won't):
@@ -22,7 +22,7 @@ Open two terminals, one for the frontend and the other for the backend.
 Install Dependencies:
 
 In both terminals, run:
-npm install
+	npm install
 
 Set .env file with your credential of database I use postgre db
 
