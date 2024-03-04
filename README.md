@@ -20,12 +20,15 @@ docker-compose up
 Alternative Setup
 If the above Docker setup doesn't suit your needs(but I hope it won't):
 Run Local Application:
-
 Open two terminals, one for the frontend and the other for the backend.
+
 Install Dependencies:
 
 In both terminals, run:
 npm install
+
+Set .env file with your credential of database I use postgre DB
+
 Start the Application:
 
 Next command in both terminals:
@@ -35,6 +38,7 @@ Using the Application
 
 Sign Up:
 Once the application is running, sign up at localhost:3001/signup.
+
 Explore the Dashboard:
 
 After signing up, you'll be redirected to the dashboard.

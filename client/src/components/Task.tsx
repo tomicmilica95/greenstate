@@ -1,12 +1,12 @@
-import { Task } from '@/types';
-import { Card, CardContent, Typography, CardActions, IconButton, Box, Chip } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
+import { Box, Card, CardActions, CardContent, Chip, IconButton, Typography } from '@mui/material';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ModalComponent } from './modal/Modal';
 import { ModalContent } from './modalContent/ModalContent';
-import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { Task } from '@/types';
 import { taskActions } from '../redux/reducers/taskReducer';
 
 interface TaskProps {

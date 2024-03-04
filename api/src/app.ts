@@ -22,4 +22,4 @@ AppDataSource.initialize()
     });
     console.log('Data Source has been initialized!');
   })
-  .catch((error) => new HandlerError(500, error));
+  .catch((error) => new HandlerError(500, 'Error starting server' + error));
