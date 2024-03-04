@@ -3,13 +3,10 @@ Project Instructions
 Welcome to My Project!😊
 
 Docker Setup
-
-Docker Setup
-Clone the Code:
-
+Clone the Code.
 Start by pulling the code from the repository.
-Run Docker:
 
+Run Docker:
 Open your terminal and execute the following command:
 docker-compose up
 
@@ -27,7 +24,7 @@ Install Dependencies:
 In both terminals, run:
 npm install
 
-Set .env file with your credential of database I use postgre DB
+Set .env file with your credential of database I use postgre db
 
 Start the Application:
 
